@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # JavaScript代码编写规范
 
 ## 前言
@@ -17,11 +16,11 @@ java编程人员应具有基本类似的编程风格，兹制定下述Java编程
 ~~~~~~~~~~~~~~
 ### Package 的命名
 ~~~~~~~~~~~~~~
-Package 的名字应该都是由一个小写单词组成。示例：unipost.trans
+Package 的名字应该都是由一个小写单词组成。示例：com.fan.xxx
 ~~~~~~~~~~~~~~
 ### Class 的命名
 ~~~~~~~~~~~~~~
-Class 的名字每个单词必须由大写字母开头而其他字母都小写的单词组成。示例：FileMng
+Class 的名字每个单词必须由大写字母开头而其他字母都小写的单词组成。示例：Xuexi
 ~~~~~~~~~~~~~~
 ### Class 成员的命名
 变量、方法、属性：大小写混排的单词组成，首字母小写
@@ -33,219 +32,40 @@ Static Final常量：大写单词组成，单词之间使用“_”连接
 
 `示例： MAX_INDEX`
 
-### 前后台变量名称
-前台变量 `fg_变量名`
-
-后台变量 `bg_变量名`
-
 ### 参数的命名
 参数的名字必须和变量的命名规范一致。
 
-### 数组的命名
-数组应该总是用下面的方式来命名：
-
-
-`byte[] buffer;`
-
-#### 而不是：
-
-`byte buffer[];`
-### 方法的参数
-使用有意义的参数命名，如果可能的话，使用和要赋值的属性一样的名字：
-
-~~~~~~~~
-setCounter(int size)
-
-{
-
-  this.size = size;
-
-}
-~~~~~~~~
 ### 缩写
 某些通用的缩写可以使用，如：
 
-`temp` 可缩写为  `tmp ` ;
-
-`message` 可缩写为  `msg`  ;
-
-### 标识符命名中应注意的问题
-除局部循环变量外变量名禁止取单个字符
-~~~~~~~~
-对于变量命名，禁止取单个字符（如i、j、k...），建议除了要有具体含义外，
-还能表明其变量类型、数据类型等，但i、j、k作局部循环变量是允许的。
-~~~~~~~~
-#### *说明：变量，尤其是局部变量，如果用单个字符表示，很容易敲错（如i写成j），而编译时又检查不出来，有可能为了这个小小的错误而花费大量的查错时间。*
+`fontcolor` 可缩写为  `fcolor` ;
 
 #### 不用数字定义名字
 除非必要，不要用数字或较奇怪的字符来定义标识符。
 
-#### *示例：如下命名，使人产生疑惑。*
-
-`void set_sls00( BYTE sls );`
-
-应改为有意义的单词命名
-
-`void setUdtMsgSls( BYTE sls );`
-
 #### 用正确的反义词组命名
 用正确的反义词组命名具有互斥意义的变量或相反动作的函数等。
-
-#### *说明：下面是一些在软件中常用的反义词组。*
-
-~~~~~
-add / remove begin / end create / destroy
-
-insert / delete first / last get / set
-
-increment / decrement put / get add / delete
-
-lock / unlock open / close min / max
-
-old / new start / stop next / previous
-
-source / target show / hide send / receive
-
-source / destination cut / paste up / down
-~~~~~
-
-示例：
-~~~~~
-int minSum;
-
-int maxSum;
-
-int addUser( BYTE *userName );
-
-int deleteUser( BYTE *userName );
-~~~~~
-#### 避免使用
-应避免使用`_EXAMPLE_TEST_`之类以下划线开始和结尾的定义。
 
 ### 样式
 #### Java 文件样式
 #### _所有的 Java(*.java) 文件都必须遵守如下的样式规则_
 
-#### 版权信息
-#### _版权信息必须在 java 文件的开头，示例：_
-
-~~~~~
-/*
-
-* Copyright (c) 2022, 特别爱学习
-
-* All rights reserved.
-
-*
-
-* FileName：filename.java
-
-* Description：简要描述本文件的内容
-
-* History：
-
-* Date Author Desc
-
-* -------------------------------------------------------
-
-*/
-~~~~~
 #### Package/Imports
 package 行要在 import 行之前，import 中标准的包名要在本地的包名之前，而且按照字母顺序排列。如果 import 行中包含了同一个包中的不同子目录，则建议用 * 来处理。
 
 ~~~~~
-package com.nantian;
+package com.fan.mapper;
 
-import java.io.*;
-
-import java.util.Observable;
-
-import translator;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.fan.pojo.Files;
+import org.apache.ibatis.annotations.Mapper;
 ~~~~~
 
-这里 java.io.* 使用来代替InputStream and OutputStream 的。
-### Class的样式
-#### Class的定义
-包含了在不同的行的 `extends` 和 `implements`
+### 构造函数
+使用`@Data`直接配置
 
-
-#### *public class CounterSet extends Observable*
-
-#### *implements Cloneable*
-
-#### *Class Fields*
-#### *类的成员变量：*
-
-~~~~~
-/**
-
-* Packet counters
-
-*/
-~~~~~
-#### *protected int[] packets;*
-#### *public 的成员变量一定要有注释而且必须生成文档（JavaDoc）。*
-
-#### *proceted、private和 package 定义的成员变量如果名字含义明确的话，可以没有注释。*
-
-#### 构造函数
-#### *构造函数，它应该用递增的方式写（比如：参数多的写在后面）。示例：*
-
-~~~~
-public CounterSet(int size)
-
-{
-
-this.size = size;
-
-}
-
-public CounterSet(int size,String name)
-
-{
-
-this.size = size;
-
-this.name = name;
-
-}
-~~~~~
-#### 克隆方法
-#### *如果这个类是可以被克隆的：*
-
-~~~~~
-public Object clone() {
-
-try {
-
-CounterSet obj = (CounterSet)super.clone();
-
-obj.packets = (int[])packets.clone();
-
-obj.size = size;
-
-return obj;
-
-}catch(CloneNotSupportedException e) {
-
-throw new InternalError("Unexpected CloneNotSUpportedException: "+ e.getMessage());
-
-}
-
-}
-~~~~~
-类成员变量和方法的编写顺序
-*建议编写顺序为：*
-~~~~
-public  protected  private
-
-final    static     transient
-~~~~
 #### main 方法
 如果main(String[]) 方法已经定义了, 那么它应该写在类的底部。
-
-### 代码样式
-代码应该用 unix 的格式，而不是 windows 的（比如：回车变成回车+换行）
 
 ### 注释
 #### 一般情况下
@@ -255,86 +75,16 @@ final    static     transient
 注释不宜太多也不能太少，注释语言必须准确、易懂、简洁。
 ~~~~~
 #### 常规注释标记说明
-#### 注释起始为“/**…*/”，注释文档的第一条为总结性语句，可在注释文档中使用HTML的标签语句，但要杜绝使用“HL”“HR”标签。注释全部采用中文，并依据以下标记规范进行书写。
-
-#### @since
-`@since` 文字：可生成一个“自从”条目，通过其中的“文字”，可说明一项特性是“自从”哪个版本开始引入的。
-
-#### @deprecated
-`@deprecated` 文字：可增加一条注释，指定特定的类、方法或变量不应继续使用，在这里，`deprecated`是“不赞成”，“不推荐”之意。利用其中的“文字”，可向用户推荐另一种方法来达到同样的目的。如：*
-
-~~~~~
-/**
-
-...
-
-@deprecated 使用setVisible
-
-*/
-~~~~~
-#### @see
-`@see` 链接：增加一个超链接。
-
-#### *若指向类、方法或变量名*
-可在`@see`后直接写上类、方法或变量名，书写方法时可省略包、类名，特性会默认为当前包或类。注意：类、方法、变量名间使用“#”分隔。如：
-
-~~~~~
-/**
-
-...
-
-@see packeg.class#readInt(String)
-
-*/
-~~~~~
-#### *若指向一个具体的URL，则直接书写HTML标签锚。如：*
-
-~~~~~
-/**
-
-...
-
-@see <a href=”www.java.com”>The Java Site</a>
-
-#### *（HTML标签的书写，参见关于HTML的书籍）*
-
-*/
-~~~~~
-#### *若指向到“seealso（参考）”小节显示出来，使用“”””（双引号）。如：*
-
-~~~~~
-/**
-
-...
-
-@see “java1.2 volume2”
-
-#### * 注：可书写多个标记，但必须放在一起，以下全部一样。* 
-
-*/
-~~~~~
-#### @link
-`@link`：可在注释中建立特殊的超链接，令其指向其他类或方法，标记规则同`@see`。
-
-### 类和接口注释说明
-类注释必须置于任何一个import语句后面，同时位于class定义的前面。
-
-`@author` 名字：建立一个“作者”条目。
-
-`@version` 文字：建立一个“版本”条目。
+#### 注释起始为“/**…*/”，注释文档的第一条为总结性语句，可在注释文档中使用HTML的标签语句，但要杜绝使用“HL”“HR”标签。注释全部采用中文。
 
 ### 方法注释说明
 紧靠在每条方法的前面，必须有一个它所描述的那个方法的签名。
 
 `@param` 变量描述：给“parameters”（参数）小节增添一个条目。<br>
 `@return` 描述：增添一个“returns”（返回值）小节。<br>
-`@throws` 类描述：为方法的“throws”（产生违例）小节增添一个条目。
-如：
+`@throws` 类描述：为方法的“throws”（产生违例）小节增添一个条目。<br>
 
-
-/**
-
-将一个双精度数格式化成一个字串
+如：将一个双精度数格式化成一个字串
 
 `@param` x 要格式化的数字
 
@@ -346,61 +96,13 @@ final    static     transient
 ## 书写格式规范
 ### 代码编写规范
 #### __缩进__
-缩进应该是每行4个空格，在使用不同的源代码管理工具时Tab字符将因为用户设置的不同而扩展为不同的宽度.
-
-如果你使用 UltrEdit 作为你的 Java 源代码编辑器的话，你可以通过如下操作来禁止保存Tab字符, 方法是通过 UltrEdit中先设定 Tab 使用的长度室4个空格，然后用 Format|Tabs to Spaces 菜单将 Tab 转换为空格。
-
-case语句下的情况处理语句也要遵从语句缩进要求。
+在使用不同的源代码管理工具时Tab字符将因为用户设置的不同而扩展为不同的宽度。
 
 #### __页宽__
-页宽应该设置为80字符. 源代码一般不会超过这个宽度, 并导致无法完整显示, 但这一设置也可以灵活调整. 在任何情况下, 超长的语句应该在一个逗号或者一个操作符后折行. 一条语句折行后, 应该比原来的语句再缩进4个字符。
-
-#### *示例：*
-~~~~~
-permCountMsg.Head.Len  =  NO7_TO_STAT_PERM_COUNT_LEN
-
-+  STAT_SIZE_PER_FRAM * sizeof( _UL );
-
-actTaskTable[FrameID * STAT_TASK_CHECK_NUMBER + index].Occupied
-
-= statPole[index].occupied;
-~~~~~
+源代码一般不会超过这个宽度, 并导致无法完整显示, 但这一设置也可以灵活调整。
 #### 空行
 
 相对独立的程序块之间、变量说明之后必须加空行。
-
-#### *示例：如下例子不符合规范。*
-
-~~~~~
-if ( !validNill(nill))
-
-{
-
-... // program code
-
-}
-
-
-repssnInd = sendData[index].repssn_index;
-
-repssnNill = sendData[index].nill;
-~~~~~
-
-#### *应如下书写*
-
-~~~~~
-if (!validNill(nill))
-
-{
-
-... // program code
-
-}
-
-repssnInd = sendData[index].repssn_index;
-
-repssnNill = sendData[index].nill;
-~~~~~
 
 #### 空格的使用
 在两个以上的关键字、变量、常量进行对等操作时，它们之间的操作符之前、之后或者前后要加空格；进行非对等操作时，如果是关系密切的立即操作符（如－>），后不应加空格。
@@ -424,44 +126,12 @@ for (...) {
 ... // program code
 
 }
-
-if (...)
-
-{
-
-... // program code
-
-}
-
-void exampleFunction( void )
-
-{
-
-... // program code
-
-}
 ~~~~~
 
 #### *应如下书写。*
 
 ~~~~~
 for (...)
-
-{
-
-... // program code
-
-}
-
-if (...)
-
-{
-
-... // program code
-
-}
-
-void exampleFunction( void )
 
 {
 
@@ -490,58 +160,6 @@ if (pUserCR == NULL)
 #### 循环、判断等语句
 循环、判断等语句中若有较长的表达式或语句，则要进行适当的划分，长表达式要在低优先级操作符处划分新行，操作符放在新行之首。
 
-#### *示例：*
-
-~~~~~
-if ((taskNo < maxActTaskNumber) && (timeNo < minActTimeNumber)
-
-&& (n7StatItemValid(statItem)))
-
-{
-
-... // program code
-
-}
-
-for (i = 0, j = 0; (i < bufferKeyword[WordIndex].word_length)
-
-&& (j < newKeyword.word_length); i++, j++)
-
-{
-
-... // program code
-
-}
-
-for (i = 0, j = 0;
-
-(i < firstWordLength) && (j < secondWordLength);
-
-i++, j++)
-
-{
-
-... // program code
-
-}
-~~~~~
-
-#### 参数划分
-若方法中的参数较长，则要进行适当的划分。
-
-#### *示例：*
-
-~~~~~
-n7StatStrCompare((BYTE *) & statObject,
-
-(BYTE *) & (actTaskTable[taskno].statObject),
-
-sizeof (_STAT_OBJECT));
-
-n7StatFlashActDuration( statItem, frameID *STAT_TASK_CHECK_NUMBER
-
-+ index, statObject );
-~~~~~
 ####  一行只写一条语句
 不允许把多个短语句写在一行中，即一行只写一条语句。
 
@@ -571,21 +189,11 @@ n7StatFlashActDuration( statItem, frameID *STAT_TASK_CHECK_NUMBER
 #### *说明：若使用了较好的命名规则，那么此问题可自动消除。*
 
 ### 程序编写规范
-#### exit()
-`exit` 除了在 `main` 中可以被调用外，其他的地方不应该调用。因为这样做不给任何代码机会来截获退出。一个类似后台服务的程序不应该因为某一个库模块决定了要退出就退出。
 
 #### 异常
 申明的错误应该抛出一个`RuntimeException`或者派生的异常。申明的错误主要指前提条件违例、处理流程违例的情况。对于功能性的分支建议采用返回值的方式。
 
 异常建议根据模块结构，采用逐级处理的方式，并打印（或者记录在日志中）。同一模块层次的异常，按功能可由某一模块集中处理。
-
-#### 垃圾收集
-JAVA使用成熟的后台垃圾收集技术来代替引用计数。但是这样会导致一个问题：你必须在使用完对象的实例以后进行清场工作（将对象置为NULL后，引用计数自动－1）。
-
-#### final 类
-绝对不要因为性能的原因将类定义为 `final` 的（除非程序的框架要求）
-
-如果一个类还没有准备好被继承，最好在注释中注明，而不要将它定义为 `final` 的。这是因为没有人可以保证会不会由于什么原因需要继承。
 
 #### 访问类的成员变量
 大部分的类成员变量应该定义为 `private` 的来防止继承类使用他们。
@@ -614,74 +222,10 @@ JAVA使用成熟的后台垃圾收集技术来代替引用计数。但是这样�
 #### ⑧减少递归调用。
 `说明：递归调用影响程序的可理解性；递归调用一般都占用较多的系统资源（如栈空间）；递归调用对程序的测试有一定影响。故除非为某些算法或功能的实现方便，应减少没必要的递归调用。`
 
-#### ⑨使用数据流图
-仔细分析模块的功能及性能需求，并进一步细分，同时若有必要画出有关数据流图。
-
-`说明：根据模块的功能图或/及数据流图映射出结构是常用方法之一。`
-
-#### ⑩避免使用BOOL参数。
-`说明：原因有二，其一是BOOL参数值无意义，TURE/FALSE的含义是非常模糊的，在调用时很难知道该参数到底传达的是什么意思；其二是BOOL参数值不利于扩充。还有NULL也是一个无意义的单词。`
-
 ### 开发过程中的技巧
-#### byte 数组转换到 characters
-为了将 `byte` 数组转换到 `characters`，你可以这么做：
-
-`"Hello world!".getBytes();`
-
-#### Utility 类
-`Utility` 类（仅仅提供方法的类）应该被申明为抽象的来防止被继承或被初始化。
-
-#### 初始化数组
-下面的代码是一种很好的初始化数组的方法：
-
-`objectArguments = new Object[] { arguments };`
-
-#### 枚举类型
-JAVA 对枚举的支持不好，但是下面的代码是一种很有用的模板：
-
-~~~~~
-class Colour {
-
-public static final Colour BLACK = new Colour(0, 0, 0);
-
-public static final Colour RED = new Colour(0xFF, 0, 0);
-
-public static final Colour GREEN = new Colour(0, 0xFF, 0);
-
-public static final Colour BLUE = new Colour(0, 0, 0xFF);
-
-public static final Colour WHITE = new Colour(0xFF, 0xFF, 0xFF);
-
-}
-~~~~~
-这种技术实现了RED, GREEN, BLUE 等可以象其他语言的枚举类型一样使用的常量。 他们可以用 == 操作符来比较。
-但是这样使用有一个缺陷：如果一个用户用这样的方法来创建颜色 BLACK
-
-new Colour(0,0,0) ，那么这就是另外一个对象。==操作符就会产生错误。她的 equal() 方法仍然有效。由于这个原因，这个技术的缺陷最好注明在文档中，或者只在自己的包中使用。
-
-#### Swing
-避免使用 `AWT` 组件<br>
-混合使用 `AWT` 和 `Swing` 组件<br>
-如果要将 `AWT` 组件和 `Swing` 组件混合起来使用的话，请小心使用。实际上，尽量不要将他们混合起来使用。
-
-滚动的 `AWT` 组件<br>
-`AWT` 组件绝对不要用 `JscrollPane` 类来实现滚动。滚动 `AWT` 组件的时候一定要用 `AWT ScrollPane` 组件来实现。
-
-避免在 InternalFrame 组件中使用 `AWT` 组件<br>
-尽量不要这么做，要不然会出现不可预料的后果。
-
-#### Z-Order 问题
-`AWT` 组件总是显示在 `Swing` 组件之上。当使用包含 `AWT` 组件的 `POP-UP` 菜单的时候要小心，尽量不要这样使用。
 
 #### 不必要的对象构造
 不要在循环中构造和释放对象
-
-#### synchronized 关键字
-避免太多的使用 `synchronized` 关键字
-
-避免不必要的使用关键字`synchronized`，应该在必要的时候再使用它，这是一个避免死锁的好方法。
-
-Borland Jbulider 不喜欢 `synchronized` 这个关键字，如果你的断点设在这些关键字的作用域内的话，调试的时候你会发现的断点会到处乱跳，让你不知所措。除非必须，尽量不要使用。
 
 ### 程序效率
 #### 注意代码的效率
@@ -698,34 +242,8 @@ Borland Jbulider 不喜欢 `synchronized` 这个关键字，如果你的断点�
 局部效率应为全局效率服务，不能因为提高局部效率而对全局效率造成影响。
 
 #### 循环体内工作量最小化。
-说明：应仔细考虑循环体内的语句是否可以放在循环体之外，使循环体内工作量最小，从而提高程序的时间效率。
+`说明：应仔细考虑循环体内的语句是否可以放在循环体之外，使循环体内工作量最小，从而提高程序的时间效率。`
 
-#### *示例：如下代码效率不高。*
-
-~~~~~
-for (i = 0; i < MAX_ADD_NUMBER; i++)
-
-{
-
-sum += i;
-
-BackSum = sum; /* backup sum */
-
-}
-
-
-语句“BackSum = sum;”完全可以放在for语句之后，如下。
-
-for (ind = 0; ind < MAX_ADD_NUMBER; ind++)
-
-{
-
-sum += i;
-
-}
-
-BackSum = sum; /* backup sum */
-~~~~~
 #### 仔细分析有关算法，并进行优化。
 #### 改进输入方式
 仔细考查、分析系统及模块处理输入（如事务、消息等）的方式，并加以改进。
@@ -733,118 +251,24 @@ BackSum = sum; /* backup sum */
 #### 提高调用不频繁的代码效率要慎重
 不应花过多的时间拼命地提高调用不很频繁的代码效率。
 
-说明：对代码优化可提高效率，但若考虑不周很有可能引起严重后果。
+`说明：对代码优化可提高效率，但若考虑不周很有可能引起严重后果。`
 
 #### 提高空间效率
 在保证程序质量的前提下，通过压缩代码量、去掉不必要代码以及减少不必要的局部和全局变量，来提高空间效率。
 
-说明：这种方式对提高空间效率可起到一定作用，但往往不能解决根本问题。
+`说明：这种方式对提高空间效率可起到一定作用，但往往不能解决根本问题。`
 
 #### 循环的位置
 在多重循环中，应将最忙的循环放在最内层。
 
-说明：减少`CPU`切入循环层的次数。
+`说明：减少CPU切入循环层的次数。`
 
-#### *示例：如下代码效率不高。*
-
-~~~~~
-for (row = 0; row < 100; row++)
-
-{
-
-for (col = 0; col < 5; col++)
-
-{
-
-sum += a[row][col];
-
-}
-
-}
-~~~~~
-#### *可以改为如下方式，以提高效率。*
-
-~~~~~
-for (col = 0; col < 5; col++)
-
-{
-
-for (row = 0; row < 100; row++)
-
-{
-
-sum += a[row][col];
-
-}
-
-}
-~~~~~
 #### 尽量减少循环嵌套层次。
 #### 避免循环体内含判断语句
 避免循环体内含判断语句，应将循环语句置于判断语句的代码块之中。
 
-说明：目的是减少判断次数。循环体中的判断语句是否可以移到循环体外，要视程序的具体情况而言，一般情况，与循环变量无关的判断语句可以移到循环体外，而有关的则不可以。
+`说明：目的是减少判断次数。循环体中的判断语句是否可以移到循环体外，要视程序的具体情况而言，一般情况，与循环变量无关的判断语句可以移到循环体外，而有关的则不可以。`
 
-#### *示例：如下代码效率稍低。*
-
-~~~~~
-for (i = 0; i < MAX_RECT_NUMBER; i++)
-
-{
-
-if (DataType == RECT_AREA)
-
-{
-
-AreaSum += RectArea[i];
-
-}
-
-else
-
-{
-
-RectLengthSum += Rect[i].length;
-
-RectWidthSum += Rect[i].width;
-
-}
-
-}
-~~~~~
-#### *因为判断语句与循环变量无关，故可如下改进，以减少判断次数。*
-
-~~~~~
-if (DataType == RECT_AREA)
-
-{
-
-for (i = 0; i < MAX_RECT_NUMBER; i++)
-
-{
-
-AreaSum += RectArea[i];
-
-}
-
-}
-
-else
-
-{
-
-for (i = 0; i < MAX_RECT_NUMBER; i++)
-
-{
-
-RectLengthSum += Rect[i].length;
-
-RectWidthSum += rect[i].width;
-
-}
-
-}
-~~~~~
 #### 不要一味追求紧凑的代码。
 说明：因为紧凑的代码并不代表高效的机器码
 
@@ -852,9 +276,6 @@ RectWidthSum += rect[i].width;
 在写代码的时候，从头至尾都应该考虑性能问题。这不是说时间都应该浪费在优化代码上，而是我们时刻应该提醒自己要注意代码的效率。比如：如果没有时间来实现一个高效的算法，那么我们应该在文档中记录下来，以便在以后有空的时候再来实现她。
 
 不是所有的人都同意在写代码的时候应该优化性能这个观点的，他们认为性能优化的问题应该在项目的后期再去考虑，也就是在程序的轮廓已经实现了以后。
-
-### 可移植性
-为了保证系统的可移植性，需要注意以下几点：
 
 #### 换行
 如果需要换行的话，尽量用 `println` 来代替在字符串中使用"`\n`"。
@@ -866,15 +287,6 @@ RectWidthSum += rect[i].width;
 要这样：
 
 `System.out.println("Hello,world!");`
-
-或者你构造一个带换行符的字符串，至少要象这样：
-
-`String newline = System.getProperty("line.separator");`
-
-`System.out.print ("Hello world" + newline);`
-
-#### PrintStream
-`PrintStream`已经被不赞成（deprecated）使用，用`PrintWrite`来代替。
 
 ### 可测性
 #### ①调测
@@ -938,20 +350,6 @@ RectWidthSum += rect[i].width;
 
 `说明：使用不一致的数据，容易使系统进入混乱状态和不可知状态。`
 
-### switch语句必须有default分支。
-### 其他质量问题
-使用第三方提供的软件开发工具包或控件时，要注意以下几点：
-
-（1）充分了解应用接口、使用环境及使用时注意事项。
-
-（2）不能过分相信其正确性。
-
-（3）除非必要，不要使用不熟悉的第三方工具包与控件。
-
-`说明：使用工具包与控件，可加快程序开发速度，节省时间，但使用之前一定对它有较充分的了解，同时第三方工具包与控件也有可能存在问题。`
-
-资源文件（多语言版本支持），如果资源是对语言敏感的，应让该资源与源代码文件脱离
-
 ## 代码编辑、编译、审查
 ### 统一编译环境
 在产品软件（项目组）中，要统一编译环境，相同的JDK版本
@@ -968,5 +366,4 @@ RectWidthSum += rect[i].width;
 
 ### 软件系统目录
 合理地设计软件系统目录，方便开发人员使用。
-=======
->>>>>>> parent of beeb70f (质量保证计划)
+
